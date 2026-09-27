@@ -6,46 +6,32 @@ This file is read as carefully as your code. A correct fix you cannot
 explain counts for little; a bug you could not fix but investigated
 honestly still counts for something.
 
-Delete the example before you submit.
-
-
-
-## Example — delete this
-
-### CC-99 — "The cart total is wrong"
-
-**Reproduced:** Added 2 dosas at Rs. 60 each. The cart showed
-Rs. 119.99999 instead of Rs. 130. Happened every time, on any dish with
-a price ending in .50.
-
-**Cause:** The total was being added up with plain floating point and
-never rounded, so 0.1 + 0.2 style errors showed up on screen. The
-rounding helper existed but this one place was not using it.
-
-**Fix:** Ran the total through the existing rounding helper instead of
-adding a new one, so every price on screen goes through the same path.
-
-**Checked:** Cart, checkout and the order screen all show Rs. 130 now.
-Prices without decimals still show without a trailing.00.
-
-**Time:** about 40 minutes, most of it working out that the cart and the
-order screen round in different places.
-
 
 
 ## CC-01 — "The search suggestions are behind everything"
 
-**Reproduced:** Typed a dish name in the search input on the menu page. The suggestions dropdown appeared, but items below the top item were covered by category tabs and menu elements underneath, making them unclickable.
+**Reproduced:** I typed a dish name, waited for a sec and then the dropdown appeared , but its z-index was below the menu grid, which was hiding its visibility.
 
-**Cause:** `.search-wrap` had a `z-index` of `1`, creating a stacking context lower than `.cat-tabs` (`z-index: 40`) and `#menu` (`z-index: 2`). As a result, `.suggest-box` (even with `z-index: 100`) was trapped inside `.search-wrap`'s lower stacking context and painted underneath `.cat-tabs`.
+**Cause:** I checked the style.css and i checked the z-idx of .suggest-box -> this thing has a z-idx of 100, BUT... the problem was that , the parent of this div , which is .search-wrap , had a z-idx of 1, and that was the main problem, coz it no matter what z-idx is given to the suggest-box it will be limited inside its parent, and the parent of menu bar has z-idx of 2, so it will appear on top of it .
+Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became the real culprit.
 
-**Fix:** Increased `.search-wrap`'s `z-index` to `41` in `frontend/style.css`, elevating `.search-wrap` and its suggestions dropdown above `.cat-tabs` (`z-index: 40`).
+**Fix:** I changed the z-idx of .search-wrap to 3, so that it has higher z-idx than its competitor which was #menu, but even changing the z-idx to 3 showed no change, that's when i realised that cat-tabs having z-idx of 40 is the main problem, even though it seems like cat-tabs is present on sideways of the menu bar, but its actually places bottom of the search bar which causes the z-idx conflict, i changed the z-idx to 41,and it worked flawlessly.
 
-**Checked:** Searched for dish names; suggestions dropdown now renders cleanly above category tabs and dish grid cards, allowing all suggestion items to be clicked.
+**Checked:** typed sa, and showing samosa etc properly.
 
-**Time:** about 20 minutes.
+**Time:** about 40 minutes.
 
+## CC-02 — "Can't read anything in dark mode"
 
+**Reproduced:** I Toggled to Dark Mode and the first thing i saw was the greyed out text, which was highly unreadable.
+
+**Cause:** Everything was fine in the 'html[data-theme="dark"]', the problem was in the line 294 of style.css, the color of dish-body was hardcoded to 2b2118.
+
+**Fix:** I spent an hour trying to invent an 'if().else.' logic in css, until i stumbled across this 'var(--ink)', and then i was like, okay so wait, why the dish-body is having a hardcoded color? then i was like hmmm, it's the bug.
+
+**Checked:** Dark mode now Works Properly with White color for the Name and Prices.
+
+**Time:** about 50 minutes.
 
 
 ## Could not fix
