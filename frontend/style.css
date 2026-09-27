@@ -184,6 +184,7 @@ h1, h2, h3 { margin: 0; }
   font-size: 15px;
   background: var(--card);
   color: var(--ink);
+  
 }
 
 .search { flex: 1; min-width: 180px; }
@@ -700,7 +701,6 @@ h1, h2, h3 { margin: 0; }
 }
 
 @media (max-width: 480px) {
-  .view { overflow-x: hidden; }
 
   .nav-toggle { display: flex; }
 
