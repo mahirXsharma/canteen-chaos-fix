@@ -26,24 +26,25 @@ rounding helper existed but this one place was not using it.
 adding a new one, so every price on screen goes through the same path.
 
 **Checked:** Cart, checkout and the order screen all show Rs. 130 now.
-Prices without decimals still show without a trailing .00.
+Prices without decimals still show without a trailing.00.
 
 **Time:** about 40 minutes, most of it working out that the cart and the
 order screen round in different places.
 
 
 
-## CC-0X — "<the complaint, in short>"
+## CC-01 — "The search suggestions are behind everything"
 
-**Reproduced:**
+**Reproduced:** Typed a dish name in the search input on the menu page. The suggestions dropdown appeared, but items below the top item were covered by category tabs and menu elements underneath, making them unclickable.
 
-**Cause:**
+**Cause:** `.search-wrap` had a `z-index` of `1`, creating a stacking context lower than `.cat-tabs` (`z-index: 40`) and `#menu` (`z-index: 2`). As a result, `.suggest-box` (even with `z-index: 100`) was trapped inside `.search-wrap`'s lower stacking context and painted underneath `.cat-tabs`.
 
-**Fix:**
+**Fix:** Increased `.search-wrap`'s `z-index` to `41` in `frontend/style.css`, elevating `.search-wrap` and its suggestions dropdown above `.cat-tabs` (`z-index: 40`).
 
-**Checked:**
+**Checked:** Searched for dish names; suggestions dropdown now renders cleanly above category tabs and dish grid cards, allowing all suggestion items to be clicked.
 
-**Time:**
+**Time:** about 20 minutes.
+
 
 
 
