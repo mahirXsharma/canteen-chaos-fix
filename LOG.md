@@ -6,8 +6,6 @@ This file is read as carefully as your code. A correct fix you cannot
 explain counts for little; a bug you could not fix but investigated
 honestly still counts for something.
 
-Delete the example before you submit.
-
 ## CC-01 — "The search suggestions are behind everything"
 
 **Reproduced:** Typed a dish name in the search input on the menu page. The suggestions dropdown appeared, but items below the top item were covered by category tabs and menu elements underneath, making them unclickable.
