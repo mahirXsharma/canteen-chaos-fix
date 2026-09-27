@@ -6,9 +6,11 @@ This file is read as carefully as your code. A correct fix you cannot
 explain counts for little; a bug you could not fix but investigated
 honestly still counts for something.
 
+
+
 ## CC-01 — "The search suggestions are behind everything"
 
-**Reproduced:** I typed a dish name, waited for a sec and then the dropdown appeared , but its z-index was below the menu grid, which was hiding its visibility
+**Reproduced:** I typed a dish name, waited for a sec and then the dropdown appeared , but its z-index was below the menu grid, which was hiding its visibility.
 
 **Cause:** I checked the style.css and i checked the z-idx of .suggest-box -> this thing has a z-idx of 100, BUT... the problem was that , the parent of this div , which is .search-wrap , had a z-idx of 1, and that was the main problem, coz it no matter what z-idx is given to the suggest-box it will be limited inside its parent, and the parent of menu bar has z-idx of 2, so it will appear on top of it .
 Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became the real culprit.
@@ -19,7 +21,17 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 
 **Time:** about 40 minutes.
 
+## CC-02 — "Can't read anything in dark mode"
 
+**Reproduced:** I Toggled to Dark Mode and the first thing i saw was the greyed out text, which was highly unreadable.
+
+**Cause:** Everything was fine in the 'html[data-theme="dark"]', the problem was in the line 294 of style.css, the color of dish-body was hardcoded to 2b2118.
+
+**Fix:** I spent an hour trying to invent an 'if().else.' logic in css, until i stumbled across this 'var(--ink)', and then i was like, okay so wait, why the dish-body is having a hardcoded color? then i was like hmmm, it's the bug.
+
+**Checked:** Dark mode now Works Propery with White color for the Name and Prices.
+
+**Time:** about 50 minutes.
 
 
 ## Could not fix
