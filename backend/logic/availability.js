@@ -25,6 +25,9 @@ function isCanteenOpen(date = new Date()) {
   return m >= OPEN_FROM && m < OPEN_TO;
 }
 
+
+
+
 /** The meal being served now, or null when closed. */
 function currentSlot(date = new Date()) {
   if (!isCanteenOpen(date)) return null;
