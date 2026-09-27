@@ -59,6 +59,21 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 
 **Time:** about 30 minutes.
  
+
+## CC-06: "I ordered more than they had"
+
+**Reproduced:** I Clicked on grilled Sandwich, and the badge says 'only 2 left' but it surprisingly letted me add 10 of them in the cart(which is the max limit for any item). 
+
+**Cause:**  There 2 Causes, in the problem state, the first part is : 'it let me order 5' meaning the bug is in fronted somewhere, and the second part 'the order went through fine' -> this one was tricky, coz the backed validated the request even when we ran out of stock. The overrall Cause was that the code was not checking 'dish.stock' properly at all the checks.
+
+**Fix:** 1st -> Frontend fix : In the SetQty function added an additonal check for 'if(next > dish.stock)', so it also checks if the qty is greater than stock or not.
+2nd -> Backend Fix : added 'if(qty > dish.stock)' .
+
+**Checked:** Now there is a proper error when we try to add more items than present in the stock
+
+**Time:** about 60 minutes.
+
+ 
 ## Could not fix
 
 For anything you investigated but did not solve. Say what you tried and

@@ -25,6 +25,13 @@ function isCanteenOpen(date = new Date()) {
   return m >= OPEN_FROM && m < OPEN_TO;
 }
 
+// function isCanteenOpen(date = new Date()) {
+//   const m = minutesOfDay(date);
+//   // Always open for testing
+//   return true;
+// }
+
+
 
 
 
