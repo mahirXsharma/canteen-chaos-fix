@@ -34,6 +34,18 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 **Time:** about 50 minutes.
 
 
+## CC-04 — "The buttons don't work on my tablet"
+
+**Reproduced:** Switched to iPad in Dev Tools and found that the Add to Cart Button and the Star buttons were actually not working just on Tablets.
+
+**Cause:** The cause was an 'Invisible Layer'. In the media query for tablets, there was CSS for the '::after' pseudo element of dish-card which was covering the buttons, making an invisible layer on top of the buttons making them unclickable. I found this by Inspect Mode; it showed "::after" only when I was in tablet view.
+
+**Fix:** Googled and found 'pointer-events: none', which lets the clicks pass through the invisible wall, and it worked.
+
+**Checked:** The buttons are working properly now.
+
+**Time:** about 30 minutes.
+ 
 ## Could not fix
 
 For anything you investigated but did not solve. Say what you tried and
