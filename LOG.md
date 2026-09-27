@@ -8,15 +8,16 @@ honestly still counts for something.
 
 ## CC-01 — "The search suggestions are behind everything"
 
-**Reproduced:** Typed a dish name in the search input on the menu page. The suggestions dropdown appeared, but items below the top item were covered by category tabs and menu elements underneath, making them unclickable.
+**Reproduced:** I typed a dish name, waited for a sec and then the dropdown appeared , but its z-index was below the menu grid, which was hiding its visibility
 
-**Cause:** `.search-wrap` had a `z-index` of `1`, creating a stacking context lower than `.cat-tabs` (`z-index: 40`) and `#menu` (`z-index: 2`). As a result, `.suggest-box` (even with `z-index: 100`) was trapped inside `.search-wrap`'s lower stacking context and painted underneath `.cat-tabs`.
+**Cause:** I checked the style.css and i checked the z-idx of .suggest-box -> this thing has a z-idx of 100, BUT... the problem was that , the parent of this div , which is .search-wrap , had a z-idx of 1, and that was the main problem, coz it no matter what z-idx is given to the suggest-box it will be limited inside its parent, and the parent of menu bar has z-idx of 2, so it will appear on top of it .
+Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became the real culprit.
 
-**Fix:** Increased `.search-wrap`'s `z-index` to `41` in `frontend/style.css`, elevating `.search-wrap` and its suggestions dropdown above `.cat-tabs` (`z-index: 40`).
+**Fix:** I changed the z-idx of .search-wrap to 3, so that it has higher z-idx than its competitore which was #menu, but even changing the z-idx to 3 showed no change, that's when i realised that cat-tabs having z-idx of 40 is the main problem, even though it seems like cat-tabs is present on sideways of the menu bar, but its actually places bottom of the search bar which causes the z-idx conflict, i changed the z-idx to 41,and it worked flawlessly.
 
-**Checked:** Searched for dish names; suggestions dropdown now renders cleanly above category tabs and dish grid cards, allowing all suggestion items to be clicked.
+**Checked:** typed sa, and showingn samosa etc properly.
 
-**Time:** about 20 minutes.
+**Time:** about 40 minutes.
 
 
 
