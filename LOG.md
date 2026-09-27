@@ -46,6 +46,19 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 
 **Time:** about 30 minutes.
  
+
+## CC-05 — "The Category Filter Bar Scrolls Away on Mobile"
+
+**Reproduced:** Switched to Phone by Dev Tools, and saw the Search Tab Scroll Away.
+
+**Cause:** The cause was this 'overflow-hidden' in the @media for mobiles, this basically stop the 'position : sticky ' from working becuase of the nature of 'overflow' property.
+
+**Fix:** I removed 'overflow: hidden' from the @media for mobiles and it worked.
+
+**Checked:** Now the Scroll Bar Sticks on TOP.
+
+**Time:** about 30 minutes.
+ 
 ## Could not fix
 
 For anything you investigated but did not solve. Say what you tried and

@@ -64,7 +64,6 @@ Reported by: a student, on a tablet
 
 > "On smaller screens, the category and filter bar scrolls away instead of
 > staying visible at the top while I scroll down through the menu dishes."
-
 Reported by: a student, on a phone
 
 
