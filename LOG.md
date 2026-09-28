@@ -34,6 +34,7 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 **Time:** about 50 minutes.
 
 
+
 ## CC-04 — "The buttons don't work on my tablet"
 
 **Reproduced:** Switched to iPad in Dev Tools and found that the Add to Cart Button and the Star buttons were actually not working just on Tablets.
@@ -72,6 +73,19 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 **Checked:** Now there is a proper error when we try to add more items than present in the stock
 
 **Time:** about 60 minutes.
+
+
+## CC-07 - "Cancelling makes it worse"
+
+**Reproduced:**  Added an item in the cart, ordered it, and then cancelled my order immediately, it should put the stock back, but it didn't.
+
+**Cause:** The problem was simple, the stock was not getting refilled when we cancel our order, so i started searching with 'cancel', and my main motive is to find a function whose job is to 'put the stock back' and after searching for 10 minutes, i found a functions 'releaseStock' in validation.js, it logic seemed okay at first, but at line 123, it was 'subtracting' instead of adding the stock back -> this was the main bug.
+
+**Fix:** In the releaseStock function, i changed the '-' to '+'
+
+**Checked:** Added an item, ordered it, cancelled it. The stock came back.
+
+**Time:** about 25 minutes.
 
  
  ## CC-08: "An old coupon still works"
@@ -115,13 +129,17 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 
 
 
-## Could not fix
+## COULD NOT FIX
+ 
+### CC-03 - "The menu is wider than my phone"
 
-For anything you investigated but did not solve. Say what you tried and
-where you got to. This is worth marks — leaving it blank when you got
-stuck is not.
+**What I tried:** I shifted to a phone using dev tools, and tried a to understand what this problem is, but i was not able to reproduced this problem, so i just decided to skip this problem.
 
-### CC-0X — "<the complaint>"
+**Where I got to:** Couldn't do much.
+
+**What I would try next:** Will try on an actual phone.
+
+
 
 **What I tried:**
 
