@@ -87,6 +87,17 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 **Time:** about 50 minutes.
 
 
+## CC-09 : "The menu shows more dishes than it should"
+
+**Reproduced:** : Opened the menu, and there was written 'showing 37 dishes', so the error was pretty clear, too many dishes were being displayed.
+
+**Cause:**  I started with 'menu' keyword, and searched a lot using vs code search feature, but didn't really found anything, then i thought of what is happening in the menu -> is is pagination, so i searched pagi.. , and then i came across this function 'paginate' in search.js, and there was an usused variable 'items' which was slicing properly, BUT, it was unused, in place of this var the code was passing 'list' which was the actual 30+ item list.
+
+**Fix:** I replaced 'list' with 'items' in the paginate function, and it worked.
+
+**Checked:** Now there is a proper pagination, and the menu shows the correct number of dishes.
+
+**Time:** about 30 minutes.
 
 ## Could not fix
 

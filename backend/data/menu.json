@@ -423,7 +423,7 @@
     "category": "Snacks",
     "slot": "allday",
     "image": "img/dish-3.jpg",
-    "stock": 2,
+    "stock": 7,
     "prepMinutes": 8,
     "spicy": true,
     "rating": 4.6,
