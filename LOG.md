@@ -74,6 +74,20 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 **Time:** about 60 minutes.
 
  
+ ## CC-08: "An old coupon still works"
+
+**Reproduced:** I tried to use the 'FRESHERS24' coupon code in the checkout, and it Wroked, which is wrong, it should show an error.
+
+**Cause:** searched coupon in the vs code search bar, and there was a lottttt of files, went through a buch of them, i was looking for something like 'new Date()', coz in order to check the expiry date of coupon, there must be this Date obj created and the main cause was -> the comparison which should check wether the current is expired or not in pricing.js was missing.
+
+**Fix:** added new code in line 93 , in pricing.js, an if statement, if(new Date(coupon.expiresAt) < now), now, i used new Date(), coz this coupon.expirest at is an a different string format.
+
+**Checked:** Now the coupon does not work and shows an error.
+
+**Time:** about 50 minutes.
+
+
+
 ## Could not fix
 
 For anything you investigated but did not solve. Say what you tried and
