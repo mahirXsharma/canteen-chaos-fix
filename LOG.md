@@ -85,7 +85,7 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 **Checked:** Now the coupon does not work and shows an error.
 
 **Time:** about 50 minutes.
-
+ 
 
 ## CC-09 : "The menu shows more dishes than it should"
 
@@ -98,6 +98,22 @@ Deeper Problem -> i thought that was it , but .cat-tabs having z-idx-40 became t
 **Checked:** Now there is a proper pagination, and the menu shows the correct number of dishes.
 
 **Time:** about 30 minutes.
+
+
+
+## CC-10: "Sorting by price is backwards"
+
+**Reproduced:**  Tried to sort the dishes by price low to high, BUT i got prices high -> low and the same happend in teh case of high -> low, it gave low -> high.
+
+**Cause:** Since the logic revolves around Sorting and 'price-asc/price-dsc', i started searching them in the vs code search bar, and while searched i stumbled across search.js, in which at line 78 we have 'SORTERS', and when i looked closely at that, i saw the sorting logic has been reversed, the a.price-b.price was present in the price-asc, and vice-versa, which was the root of this problem.
+
+**Fix:** Swapped a.price-b.price with b.price-a.price at lines 79 and 80 in search.js.
+
+**Checked:** Now the sorting works properly.
+
+**Time:** about 20 minutes.
+
+
 
 ## Could not fix
 
